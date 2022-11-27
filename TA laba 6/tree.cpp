@@ -34,6 +34,7 @@ void Tree::Add(t value) {
 					return;
 				}
 			}
+			else return;
 		}
 	}
 }
@@ -128,7 +129,7 @@ void Tree::Delete(t value) {
 				min->Right->Parent = min->Parent;
 				min->Parent->Left = min->Right;
 			}
-			else min->Parent->Left = nullptr;
+			else if (min->Parent != temp) min->Parent->Left = nullptr;
 
 			if (temp->Parent) {
 				if (temp->Parent->Left == temp) temp->Parent->Left = min;
@@ -219,29 +220,32 @@ int Tree::FindDepth(Node* node) {
 }
 void Tree::Balance1(Node* node) {
 	if (!node) return;
-	cout << "current node " << node->Value << endl;
+
+	//cout << "current node " << node->Value << endl;
+
 	Balance1(node->Left);
 	Balance1(node->Right);
+
 	if (std::abs(FindDepth(node->Right) - FindDepth(node->Left)) > 1) {
 		if (node->Left && FindDepth(node->Left->Right) > FindDepth(node->Left->Left)) {
 			RightBigRot(node);
-			cout << "right big rot " << node->Value << endl;
+			//cout << "right big rot " << node->Value << endl;
 		}
 		else if (node->Left || (node->Left && FindDepth(node->Left->Right) <= FindDepth(node->Left->Left))) {
 			RightSmallRot(node);
-			cout << "right small rot " << node->Value << endl;
+			//cout << "right small rot " << node->Value << endl;
 		}
 		else if (node->Right && FindDepth(node->Right->Left) > FindDepth(node->Right->Right)) {
 			LeftBigRot(node);
-			cout << "left big rot " << node->Value << endl;
+			//cout << "left big rot " << node->Value << endl;
 		}
 		else if (node->Right && FindDepth(node->Right->Left) <= FindDepth(node->Right->Right)) {
 			LeftSmallRot(node);
-			cout << "left small rot " << node->Value << endl;
+			//cout << "left small rot " << node->Value << endl;
 		}
 	}
-	Show(Root, 0, false);
-	cout << endl;
+	//Show(Root, 0, false);
+	//cout << endl;
 }
 void Tree::ToLose(Node* node, Node* parent) {
 	if (!node) return;
@@ -302,6 +306,6 @@ void Tree::Balance() {
 			RightSmallRot(temp->Parent->Parent);
 		}
 		count /= 2;
-		Show(Root, 0, false);
+		//Show(Root, 0, false);
 	}
 }

@@ -6,7 +6,6 @@ void t61(Tree* tree) {
 	t values[] = {80, 40, 60, 120, 20, 100, 20, 50, 140, 100, 10, 30, 50, 70, 90, 110, 130, 150};
 
 	for (int i = 0; i < sizeof(values) / sizeof(t); i++) tree->Add(values[i]);
-
 	tree->Show(tree->Root, 0, false);
 }
 void t62(Tree* tree) {
@@ -117,10 +116,10 @@ int main()
 
 	cout << "\n<===============[Laba 6]===============>\n\n";
 
-	/*t61(tree);
+	t61(tree);
 	t62(tree);
 	t63(tree);
-	t64(tree);*/
+	t64(tree);
 
 	//============7 lab============
 
@@ -132,6 +131,8 @@ int main()
 	t72(tree);
 	t73(tree);
 	t74(tree);
-	tree->Delete(20);
 	t75(tree);
+
+	tree->Delete(36);
+	tree->Show(tree->Root, 0, false);
 }
