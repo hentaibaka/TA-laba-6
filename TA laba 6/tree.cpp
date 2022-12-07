@@ -284,10 +284,12 @@ void Tree::Balance() {
 		count++;
 	}
 
-	int right = (count - 1) / 2 + 1;
+	int right = (count + 1) / 2;
+	if (right * 2 - 1 != count) right--;
 
 	temp = Root;
 	for (int i = 0; i < count - (right * 2 - 1); i++) {
+		if (!temp) break;
 		temptemp = temp->Left;
 		temp = temp->Left->Left;
 		RightSmallRot(temptemp);
