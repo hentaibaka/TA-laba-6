@@ -286,14 +286,10 @@ void Tree::Balance() {
 		temp = temp->Left;
 		count++;
 	}
-
-	if (++count % 2 == 0 && temp->Parent) RightSmallRot(temp->Parent);
-
-	int right = (count + 1) / 2;
+	//count на 1 меньше чем эл-тов
+	if (count % 2 == 1 && temp->Parent) RightSmallRot(temp->Parent);
 
 	temp = Root;
-	
-	count -= count - (right * 2 - 1);
 	int log2 = std::log2(count);
 	for (int j = 0; j < log2; j++) {
 		temp = Root;
