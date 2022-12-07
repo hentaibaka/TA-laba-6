@@ -270,7 +270,10 @@ void Tree::ToLose(Node* node, Node* parent) {
 	ToLose(left, parent);
 }
 void Tree::Balance() {
+	if (!Root) return;
+
 	Node* temp = Root;
+	Node* temptemp = nullptr;
 	Root = nullptr;
 	ToLose(temp, nullptr);
 
@@ -281,24 +284,17 @@ void Tree::Balance() {
 		count++;
 	}
 
-	int right = (count + 1) / 2 + 1;
+	int right = (count - 1) / 2 + 1;
 
 	temp = Root;
-	for (int i = 0; i < (right * 2 - 1) - count; i++) {
+	for (int i = 0; i < count - (right * 2 - 1); i++) {
+		temptemp = temp->Left;
 		temp = temp->Left->Left;
-		RightSmallRot(temp->Parent);
-		/*if (temp == Root) Root = temp->Left;
-		temp->Left->Right = temp;
-		temp->Left->Parent = temp->Parent;
-		if (temp->Parent) temp->Parent->Left = temp->Left;
-		temp->Parent = temp->Left;
-		temp->Left = nullptr;
-
-		temp = temp->Parent->Left;*/
+		RightSmallRot(temptemp);
 	}
 
-	count -= (right * 2 - 1) - count;
-	int log2 = (std::log2(count)) - 1;
+	count -= count - (right * 2 - 1);
+	int log2 = (std::log2(count));
 	for (int j = 0; j < log2; j++) {
 		temp = Root;
 		for (int i = 0; i < count - 1; i += 2) {
@@ -306,6 +302,5 @@ void Tree::Balance() {
 			RightSmallRot(temp->Parent->Parent);
 		}
 		count /= 2;
-		//Show(Root, 0, false);
 	}
 }
