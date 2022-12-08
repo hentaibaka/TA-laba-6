@@ -125,7 +125,11 @@ void Tree::Delete(t value) {
 
 			while (min->Left) min = min->Left; // ищем минимального потомка у правой ветви найдённого значения
 
-			if (min->Right) {
+			if (min->Right && min->Parent != temp) {
+				min->Right->Parent = min->Parent;
+				min->Parent->Left = min->Right;
+			}
+			if (min->Right && min->Parent == temp) {
 				min->Right->Parent = min->Parent;
 				min->Parent->Right = min->Right;
 			}
