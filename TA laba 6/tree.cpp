@@ -127,7 +127,7 @@ void Tree::Delete(t value) {
 
 			if (min->Right) {
 				min->Right->Parent = min->Parent;
-				min->Parent->Left = min->Right;
+				min->Parent->Right = min->Right;
 			}
 			else if (min->Parent != temp) min->Parent->Left = nullptr;
 
